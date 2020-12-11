@@ -1,36 +1,47 @@
-import React from "react"
-import { Switch, Route, Redirect } from "react-router-dom"
-import PropTypes from "prop-types"
-import HomePage from "../../pages/HomePage"
-import MoviesPage from "../../pages/MoviesPage"
+import React, {Suspense, lazy} from "react"
+import routes from '../../routes'
+import { Switch, Route } from "react-router-dom"
 import NotFoundPage from "../../pages/NotFoundPage"
-import MovieDetailsPage from "../../pages/MovieDetailsPage"
 import Layout from "../Layout"
+
+const HomePage = lazy(()=>
+import('../../pages/HomePage' /*webpackChunkName: 'home-page' */),
+);
+
+const MoviesPage = lazy(()=>
+import('../../pages/MoviesPage' /*webpackChunkName: 'movies-page' */),
+);
+
+const MovieDetailsPage = lazy(()=>
+import('../../pages/MovieDetailsPage' /*webpackChunkName: 'movie-details-page' */),
+);
 
 
 const App = () => (
   <Layout>
+    <Suspense fallback = {<h2>Loading...</h2>}>
     <Switch>
-      <Route path="/" exact component={HomePage} />
-      <Route path="/movies" exact component={MoviesPage} />
-      <Route path="/movies/:movieId" component={MovieDetailsPage} />
-      <Route component={NotFoundPage} />
+      <Route path={routes.homePage} exact component={HomePage} />
+      <Route path={routes.moviesPage} exact component={MoviesPage} />
+      <Route path={routes.movieDetailsPage} component={MovieDetailsPage} />
+      <Route path ={routes.errorPage} component={NotFoundPage} />
+      {/* <Route component={NotFoundPage} /> */}
     </Switch>
+    </Suspense>
   </Layout>
 )
 
-App.propTypes = {
-  // bla: PropTypes.string,
-}
+//*---------before splitting----------------
 
-App.defaultProps = {
-  // bla: 'test',
-}
+// const App = () => (
+//   <Layout>
+//     <Switch>
+//       <Route path="/" exact component={HomePage} />
+//       <Route path="/movies" exact component={MoviesPage} />
+//       <Route path="/movies/:movieId" component={MovieDetailsPage} />
+//       <Route component={NotFoundPage} />
+//     </Switch>
+//   </Layout>
+// )
 
 export default App
-
-{
-  /* <Route path = "/movies/:movieId" component ={MovieDetailsPage} />
-<Route path = "/movies/:movieId/cast" component ={Cast} />
-<Route path = "/movies/:movieId/reviews" component ={Reviews} /> */
-}

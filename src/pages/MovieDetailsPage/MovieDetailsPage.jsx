@@ -79,14 +79,15 @@ class MovieDetailsPage extends Component {
                   Cast
                 </Link>
               </li>
-              <Route
+             
+              <li className="listItem">
+                <Link to={`${match.url}/reviews`}>Reviews</Link>
+              </li>
+               <Route
                 path="/movies/:movieId/cast"
                 component={MovieCast}
                 location={this.props.location}
               />
-              <li className="listItem">
-                <Link to={`${match.url}/reviews`}>Reviews</Link>
-              </li>
               <Route path="/movies/:movieId/reviews" component={MovieReviews} />
             </ul>
           </div>
