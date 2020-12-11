@@ -5,6 +5,8 @@ import { fetchWithSearchQuery } from "../../services/moviesApi"
 import getQueryParams from "../../utils/get-query-params"
 import Searchbox from "../../components/Searchbox"
 
+import withLog from "../../components/hocs/withLog"
+
 class MoviesPage extends Component {
   state = {
     movies: [],
@@ -83,4 +85,4 @@ MoviesPage.defaultProps = {
   // bla: 'test',
 }
 
-export default MoviesPage
+export default withLog(MoviesPage)

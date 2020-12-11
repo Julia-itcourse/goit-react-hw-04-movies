@@ -14,7 +14,7 @@ class MovieReviews extends Component {
 
   render() {
     const { reviews } = this.state
-    return (
+    return reviews.length > 0?(
       <div className="MovieReviewsWrapper">
         <ul>
           {reviews.map((review) => (
@@ -24,8 +24,8 @@ class MovieReviews extends Component {
             </li>
           ))}
         </ul>
-      </div>
-    )
+      </div>) : (<p>No reviews for this movie yet</p>)
+    
   }
 }
 

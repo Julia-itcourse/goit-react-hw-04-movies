@@ -7,11 +7,12 @@ import axios from "axios"
 // https://developers.themoviedb.org/3/movies/get-movie-reviews - запрос обзоров для страницы кинофильма.
 
 const apiKey = "36a03f1455514d20be8aff6b16886aa2"
+// https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}
 
-export const fetchTrending = () => {
+export const fetchTrending = (url) => {
   console.log("moviesApi.fetchTrending")
   return axios
-    .get(`https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}`)
+    .get(url+'api_key=' + apiKey)
     .then((res) => res.data.results)
 }
 

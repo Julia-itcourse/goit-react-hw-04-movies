@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import { fetchTrending } from "../../services/moviesApi"
 import styles from '../HomePage/HomePage.module.css'
+import withFetch from '../../components/hocs/withFetch'
 
 class HomePage extends Component {
   state = {
@@ -16,13 +17,14 @@ class HomePage extends Component {
   //   console.log(this.state.movies)
   // }
 
-  componentDidMount() {
-    fetchTrending().then((movies) => this.setState({ movies }))
-  }
+  // componentDidMount() {
+  //   fetchTrending().then((movies) => this.setState({ movies }))
+  // }
 
   render() {
-    console.log("this.props.match.url", this.props.match.url)
-    const { movies } = this.state
+
+    const {movies} = this.props
+ 
     return (
       <div className = {styles.container}>
         <h2>Trending movies</h2>
@@ -53,4 +55,4 @@ HomePage.defaultProps = {
   // bla: 'test',
 }
 
-export default HomePage
+export default withFetch('https://api.themoviedb.org/3/trending/all/day?')(HomePage)
